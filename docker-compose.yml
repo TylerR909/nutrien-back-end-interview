@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=illnevertell
+      - POSTGRES_DB=nutrien
+    ports:
+      - 5432:5432
+    # "if no data volume is mounted at that path then the container runtime will automatically create an anonymous volume⁠ that is not reused across container re-creations"
+    # Omitting for the purposes of the interview so each boot will ingest the data anew, but this is how you'd persist
+    # volumes: db:/var/lib/postgresql/data
+
+  service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Great place to swap out the real username+pw for Secrets Manager (above too). DB must match the POSTGRES_DB up above.
+      DATABASE_URL: postgres://postgres:illnevertell@db:5432/nutrien
+      SERVER_PORT: 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+# See `db: volumes:` why this is omitted but no point in cluttering Interviewers' Volumes if we aren't actually using a volume.
+# volumes:
+#   db:
