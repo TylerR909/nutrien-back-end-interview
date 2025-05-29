@@ -33,6 +33,7 @@ From there I've modeled a `src/db/schema/projection.ts` Schema after the provide
 
 ```sh
 > docker-compose up -d
+> npm run docker:migrate
 > curl localhost:3000/Commodity/histogram
 [{ key: "Rice", value: 216 }]
 > docker-compose down

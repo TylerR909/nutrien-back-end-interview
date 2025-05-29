@@ -10,7 +10,7 @@ app.use(useDb);
 /** ROUTES */
 app.use(histogram);
 app.get("/hello", (req, res) => {
-  res.send("world asdf \n");
+  res.send("world\n");
 });
 
 /** BOOTUP */
