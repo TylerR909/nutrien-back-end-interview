@@ -9,8 +9,7 @@ services:
       - POSTGRES_DB=nutrien
     ports:
       - 5432:5432
-    # "if no data volume is mounted at that path then the container runtime will automatically create an anonymous volume⁠ that is not reused across container re-creations"
-    # Omitting for the purposes of the interview so each boot will ingest the data anew, but this is how you'd persist
+    # run `docker-compose down -v` and `docker-compose up --force-recreate` to reset the database
     # volumes: db:/var/lib/postgresql/data
 
   service:
@@ -25,8 +24,8 @@ services:
       - 3000:3000
     volumes:
       - ./:/app
+      # Creates an anonymous volume so we don't overwrite the Dockerfile `npm i` step, which installs `@esbuild/linux-arm64` bindings for
+      # `tsx` to use instead of the `@esbuild/darwin-arm64` bindings intalled for OSX.
+      - /app/node_modules
     depends_on:
       - db
-# See `db: volumes:` why this is omitted but no point in cluttering Interviewers' Volumes if we aren't actually using a volume.
-# volumes:
-#   db:

@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.ts"
+    "docker:migrate": "docker-compose exec service npx drizzle-kit push",
+    "start": "tsx watch src/index.ts"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TylerR909/nutrien-back-end-interview.git"
@@ -18,19 +20,17 @@
     "url": "https://github.com/TylerR909/nutrien-back-end-interview/issues"
   },
   "homepage": "https://github.com/TylerR909/nutrien-back-end-interview#readme",
-  "nodemonConfig": {
-    "ignore": [
-      "**/*.test.*"
-    ]
-  },
   "devDependencies": {
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.24",
-    "nodemon": "^3.1.10",
-    "ts-node": "^10.9.2",
+    "@types/pg": "^8.15.2",
+    "drizzle-kit": "^0.31.1",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "drizzle-orm": "^0.44.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.0"
   }
 }
