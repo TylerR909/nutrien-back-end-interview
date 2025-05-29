@@ -1,6 +1,7 @@
 import express from "express";
 import { useDb } from "./db/useDb.js";
 import { histogram } from "./routes/histogram.js";
+import { seed } from "./routes/seed.js";
 
 const app = express();
 
@@ -9,6 +10,7 @@ app.use(useDb);
 
 /** ROUTES */
 app.use(histogram);
+app.use(seed);
 app.get("/hello", (req, res) => {
   res.send("world\n");
 });
