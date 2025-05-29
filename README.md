@@ -25,7 +25,7 @@ Probably jump straight to `src/index.ts` to see my Express instantiation. You ca
 
 The database setup is handled in `src/db/index.ts` to connect to Postgres, then the `db` object is connected to Requests as middleware via `useDb.ts` plugged into `app.use(useDb)`. I'm aware that we should create a Pool of connections that Requests can each use but that's more of a discussion topic or stretch goal than interview-MVP.
 
-The `docker-compose.yml` shows that there is a Postgres db set up, then its credentials are assed as a `DATABASE_URL` to the service which blindly connects to the database.
+The `docker-compose.yml` shows that there is a Postgres db set up, then its credentials are passed as a `DATABASE_URL` to the service which blindly connects to the database.
 
 From there I've modeled a `src/db/schema/projection.ts` Schema after the provided Projection2021.csv file to convert the CSV to Database entries. The database will be re-seeded on each restart by design.
 
