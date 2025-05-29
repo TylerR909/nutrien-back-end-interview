@@ -11,3 +11,16 @@ export const projection = pgTable("projections", {
   year: t.varchar().notNull(),
   value: t.varchar().notNull(),
 });
+
+export const projectionCsvHeaderToSchemaCol: Record<
+  string,
+  keyof typeof projection.$inferInsert
+> = {
+  Attribute: "attribute",
+  Commodity: "commodity",
+  CommodityType: "commodityType",
+  Units: "units",
+  YearType: "yearType",
+  Year: "year",
+  Value: "value",
+};
