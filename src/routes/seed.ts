@@ -3,15 +3,17 @@ import { PgTable } from "drizzle-orm/pg-core";
 import fs from "fs";
 import { Router } from "express";
 import { db } from "../db/index.js";
-import { projection, projectionCsvHeaderToSchemaCol } from "../db/schema/projection.js";
 import { fail } from "../utils.js";
 import Papa from "papaparse";
+import { feedGrain, feedGrainCsvHeaderToSchemaCol } from "../db/schema/feedGrain.js";
+import { projection, projectionCsvHeaderToSchemaCol } from "../db/schema/projection.js";
 
 const route = Router();
 
 /** `curl -X POST localhost:3000/seed` to seed the database with CSV data */
 route.post("/seed", async (req, res) => {
   await seedFromSchema(projection, "Projection2021.csv", projectionCsvHeaderToSchemaCol);
+  await seedFromSchema(feedGrain, "FeedGrains.csv", feedGrainCsvHeaderToSchemaCol);
 
   res.sendStatus(200);
 });

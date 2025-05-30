@@ -12,10 +12,7 @@ export const projection = pgTable("projections", {
   value: t.varchar().notNull(),
 });
 
-export const projectionCsvHeaderToSchemaCol: Record<
-  string,
-  keyof typeof projection.$inferInsert
-> = {
+export const projectionCsvHeaderToSchemaCol: Record<string, keyof typeof projection.$inferInsert> = {
   Attribute: "attribute",
   Commodity: "commodity",
   CommodityType: "commodityType",
